@@ -15,7 +15,7 @@ class YearNotifier extends Notifier<int> {
       return;
     }
 
-    state = state--;
+    state--;
   }
 
   /// 다음 연도 선택
@@ -26,7 +26,7 @@ class YearNotifier extends Notifier<int> {
       return;
     }
 
-    state = state++;
+    state++;
   }
 }
 
