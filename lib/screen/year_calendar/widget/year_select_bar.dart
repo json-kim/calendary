@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_todaily/screen/year_calendar/provider/year_provider.dart';
+import 'package:flutter_todaily/provider/year_provider.dart';
 
 class YearSelectBar extends ConsumerWidget {
   const YearSelectBar({super.key});

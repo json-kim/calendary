@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_todaily/screen/year_calendar/provider/year_provider.dart';
+import 'package:flutter_todaily/provider/year_provider.dart';
 import 'package:flutter_todaily/util/const_value.dart';
 import 'package:mockito/mockito.dart';
 
