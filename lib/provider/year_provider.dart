@@ -1,4 +1,3 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todaily/util/const_value.dart';
 
@@ -31,6 +30,7 @@ class YearNotifier extends Notifier<int> {
   }
 }
 
+/// 선택된 연도 프로바이더
 final yearProvider = NotifierProvider<YearNotifier, int>(() {
   return YearNotifier();
 });
