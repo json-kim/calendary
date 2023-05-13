@@ -9,4 +9,4 @@ final dateOfMonthProvider = Provider.family<int, int>((ref, int month) {
   final date = DateTime(year, month);
 
   return date.getDaysInMonth;
-});
+}, name: 'DateOfMonthProvider');
