@@ -301,6 +301,7 @@ class CalendarsCompanion extends UpdateCompanion<Calendar> {
 abstract class _$LocalDatabase extends GeneratedDatabase {
   _$LocalDatabase(QueryExecutor e) : super(e);
   late final $CalendarsTable calendars = $CalendarsTable(this);
+  late final CalendarsDao calendarsDao = CalendarsDao(this as LocalDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
