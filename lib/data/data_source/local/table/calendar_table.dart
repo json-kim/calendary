@@ -7,4 +7,10 @@ class Calendars extends Table {
   TextColumn get content => text().withLength(max: 1000).nullable()();
   IntColumn get mood => intEnum<CalendarMood>()();
   DateTimeColumn get date => dateTime()();
+
+  Expression<bool> isSameDate(DateTime otherDate) {
+    return date.year.equals(otherDate.year) &
+        date.month.equals(otherDate.month) &
+        date.day.equals(otherDate.day);
+  }
 }
