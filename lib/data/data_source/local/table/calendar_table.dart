@@ -9,8 +9,9 @@ class Calendars extends Table {
   DateTimeColumn get date => dateTime()();
 
   Expression<bool> isSameDate(DateTime otherDate) {
-    return date.year.equals(otherDate.year) &
-        date.month.equals(otherDate.month) &
-        date.day.equals(otherDate.day);
+    final localDate = date.modify(const DateTimeModifier.localTime());
+    return localDate.year.equals(otherDate.year) &
+        localDate.month.equals(otherDate.month) &
+        localDate.day.equals(otherDate.day);
   }
 }
