@@ -40,11 +40,8 @@ void main() {
 
       final insertCalendar = await dao.selectCalendarWithId(id);
 
-      expect(insertCalendar?.id, id);
-      expect(insertCalendar?.title, calendarsCompanion.title.value);
-      expect(insertCalendar?.content, calendarsCompanion.content.value);
-      expect(insertCalendar?.mood, calendarsCompanion.mood.value);
-      expect(insertCalendar?.date, calendarsCompanion.date.value);
+      expect(calendarsCompanion.copyWith(id: Value(id)),
+          insertCalendar?.toCompanion(true));
     });
 
     test('deleteCalendar() Calendars 테이블에 캘린더를 삭제한다.', () async {
@@ -79,11 +76,9 @@ void main() {
 
       // 타이틀만 변경되었는지 체크
       final updatedCalendar = await dao.selectCalendarWithId(updatedId);
-      expect(updatedCalendar?.title, newTitle);
-      expect(insertCalendar?.id, updatedCalendar?.id);
-      expect(insertCalendar?.content, updatedCalendar?.content);
-      expect(insertCalendar?.mood, updatedCalendar?.mood);
-      expect(insertCalendar?.date, updatedCalendar?.date);
+
+      expect(newCalendar.copyWith(id: Value(updatedId)),
+          updatedCalendar?.toCompanion(true));
     });
 
     test('selectCalendarListInYear() Calendars 테이블에서 연도에 해당하는 캘린더만 가져온다.',
