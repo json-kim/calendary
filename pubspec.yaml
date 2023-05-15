@@ -58,6 +58,7 @@ dev_dependencies:
   mockito: ^5.4.0
   drift_dev: ^2.8.0
   build_runner: ^2.3.3
+  faker: ^2.1.0
 
 
 # For information on the generic Dart part of this file, see the
