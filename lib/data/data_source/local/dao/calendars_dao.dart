@@ -28,13 +28,21 @@ class CalendarsDao extends DatabaseAccessor<LocalDatabase>
 
   /// 캘린더 가져오기 with year
   Future<List<Calendar>> selectCalendarListInYear(int year) {
-    return (select(calendars)..where((tbl) => tbl.date.year.equals(year)))
+    return (select(calendars)
+          ..where((tbl) => tbl.date
+              .modify(const DateTimeModifier.localTime())
+              .year
+              .equals(year)))
         .get();
   }
 
   /// 캘린더 가져오기 with month
   Future<List<Calendar>> selectCalendarListInMonth(int month) {
-    return (select(calendars)..where((tbl) => tbl.date.month.equals(month)))
+    return (select(calendars)
+          ..where((tbl) => tbl.date
+              .modify(const DateTimeModifier.localTime())
+              .month
+              .equals(month)))
         .get();
   }
 
@@ -48,5 +56,10 @@ class CalendarsDao extends DatabaseAccessor<LocalDatabase>
   Future<Calendar?> selectCalendarWithId(int id) {
     return (select(calendars)..where((tbl) => tbl.id.equals(id)))
         .getSingleOrNull();
+  }
+
+  /// 캘린더 전부 제거하기
+  Future<int> deleteCalendarAll() {
+    return delete(calendars).go();
   }
 }
