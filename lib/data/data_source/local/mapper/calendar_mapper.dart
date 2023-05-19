@@ -6,7 +6,11 @@ extension CalendarModelMapper on CalendarModel {
   /// 캘린더 모델을 DB에 삽입할 수 있는 모델로 변경하는 함수
   CalendarsCompanion toCompanion() {
     return CalendarsCompanion.insert(
-        title: title, mood: mood, date: date, content: Value(content));
+        id: Value(id),
+        title: title,
+        mood: mood,
+        date: date,
+        content: Value(content));
   }
 }
 
