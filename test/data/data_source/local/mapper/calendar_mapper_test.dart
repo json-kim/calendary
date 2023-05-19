@@ -54,11 +54,11 @@ void main() {
 
       final model = entity.toModel();
 
-      expect(model.id, entity.id);
-      expect(model.title, entity.title);
-      expect(model.content, entity.content);
-      expect(model.date, entity.date);
-      expect(model.mood, entity.mood);
+      expect(model?.id, entity.id);
+      expect(model?.title, entity.title);
+      expect(model?.content, entity.content);
+      expect(model?.date, entity.date);
+      expect(model?.mood, entity.mood);
     });
   });
 }
