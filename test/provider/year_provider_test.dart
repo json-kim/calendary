@@ -19,7 +19,7 @@ void main() {
 
       final nowYear = DateTime.now().year;
 
-      expect(container.read(yearProvider.notifier).state, nowYear);
+      expect(container.read(yearProvider), nowYear);
     });
 
     test('beforeYear() 실행시, 연도가 1 감소한다.', () {
@@ -69,7 +69,7 @@ void main() {
         container.read(yearProvider.notifier).beforeYear();
       }
 
-      final afterYear = container.read(yearProvider.notifier).state;
+      final afterYear = container.read(yearProvider);
 
       expect(afterYear, 2021);
     });
@@ -85,7 +85,7 @@ void main() {
         container.read(yearProvider.notifier).nextYear();
       }
 
-      final afterYear = container.read(yearProvider.notifier).state;
+      final afterYear = container.read(yearProvider);
 
       expect(afterYear, DateTime.now().year + maxYearTerm);
     });
