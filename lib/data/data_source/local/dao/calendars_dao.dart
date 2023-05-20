@@ -9,7 +9,7 @@ abstract class CalendarsDaoType {
   Future<int> deleteCalendar(int id);
   Future<int> updateCalendar(CalendarsCompanion newCalendar);
   Future<List<Calendar>> selectCalendarListInYear(int year);
-  Future<List<Calendar>> selectCalendarListInMonth(int month);
+  Future<List<Calendar>> selectCalendarListInMonth(int year, int month);
   Future<Calendar?> selectCalendarOfDate(DateTime otherDate);
   Future<Calendar?> selectCalendarWithId(int id);
   Future<int> deleteCalendarAll();
@@ -52,14 +52,19 @@ class CalendarsDao extends DatabaseAccessor<LocalDatabase>
         .get();
   }
 
-  /// 캘린더 가져오기 with month
+  /// 캘린더 가져오기 with year & month
   @override
-  Future<List<Calendar>> selectCalendarListInMonth(int month) {
+  Future<List<Calendar>> selectCalendarListInMonth(int year, int month) {
     return (select(calendars)
-          ..where((tbl) => tbl.date
-              .modify(const DateTimeModifier.localTime())
-              .month
-              .equals(month)))
+          ..where((tbl) =>
+              tbl.date
+                  .modify(const DateTimeModifier.localTime())
+                  .month
+                  .equals(month) &
+              tbl.date
+                  .modify(const DateTimeModifier.localTime())
+                  .year
+                  .equals(year)))
         .get();
   }
 

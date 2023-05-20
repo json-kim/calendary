@@ -121,7 +121,7 @@ void main() {
       expect(calendar2024.length, count2024);
     });
 
-    test('selectCalendarListInMonth() Calendars 테이블에서 달에 해당하는 캘린더만 가져온다.',
+    test('selectCalendarListInMonth() Calendars 테이블에서 연도, 달에 해당하는 캘린더만 가져온다.',
         () async {
       addTearDown(() async => await dao.deleteCalendarAll());
 
@@ -129,35 +129,35 @@ void main() {
       const countApril = 20;
       const countMay = 30;
 
-      // 3월 캘린더 삽입
+      // 2022년 3월 캘린더 삽입
       for (int i = 0; i < countMarch; i++) {
         final calendarCompanion =
             calendarsCompanion.copyWith(date: Value(DateTime(2022, 3, i + 1)));
         await dao.insertCalendar(calendarCompanion);
       }
-      // 4월 캘린더 삽입
+      // 2023년 4월 캘린더 삽입
       for (int i = 0; i < countApril; i++) {
         final calendarCompanion =
             calendarsCompanion.copyWith(date: Value(DateTime(2023, 4, i + 1)));
         await dao.insertCalendar(calendarCompanion);
       }
-      // 5월 캘린더 삽입
+      // 2024년 5월 캘린더 삽입
       for (int i = 0; i < countMay; i++) {
         final calendarCompanion =
             calendarsCompanion.copyWith(date: Value(DateTime(2024, 5, i + 1)));
         await dao.insertCalendar(calendarCompanion);
       }
 
-      // 3월 캘린더 개수 체크
-      final calendarsMarch = await dao.selectCalendarListInMonth(3);
+      // 2022년 3월 캘린더 개수 체크
+      final calendarsMarch = await dao.selectCalendarListInMonth(2022, 3);
       expect(calendarsMarch.length, countMarch);
 
-      // 4월 캘린더 개수 체크
-      final calendarApril = await dao.selectCalendarListInMonth(4);
+      // 2023년 4월 캘린더 개수 체크
+      final calendarApril = await dao.selectCalendarListInMonth(2023, 4);
       expect(calendarApril.length, countApril);
 
-      // 5월 캘린더 개수 체크
-      final calendarMay = await dao.selectCalendarListInMonth(5);
+      // 2024년 5월 캘린더 개수 체크
+      final calendarMay = await dao.selectCalendarListInMonth(2024, 5);
       expect(calendarMay.length, countMay);
     });
 
