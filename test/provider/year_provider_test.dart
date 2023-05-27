@@ -9,7 +9,7 @@ class Listener with Mock {
 }
 
 void main() {
-  group('[Provider] YearProvider 테스트 /', () {
+  group('[Provider] YearProvider 테스트 :', () {
     test('생성시, 최초 연도는 올해 연도이다.', () {
       final container = ProviderContainer();
       addTearDown(container.dispose);
@@ -58,7 +58,7 @@ void main() {
       verifyNoMoreInteractions(listener);
     });
 
-    test('최소 연도는 2021년이다.', () {
+    test('최소 연도는 2022년이다.', () {
       final container = ProviderContainer();
       addTearDown(container.dispose);
       final listener = Listener();
@@ -71,7 +71,7 @@ void main() {
 
       final afterYear = container.read(yearProvider);
 
-      expect(afterYear, 2021);
+      expect(afterYear, firstYear);
     });
 
     test('최대 연도는 올해 + 5 이다.', () {

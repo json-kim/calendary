@@ -11,7 +11,7 @@ class YearNotifier extends Notifier<int> {
 
   /// 이전 연도 선택
   void beforeYear() {
-    if (state < 2022) {
+    if (state <= firstYear) {
       return;
     }
 
