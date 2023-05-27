@@ -1,3 +1,4 @@
+import 'package:dart_date/dart_date.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_todaily/provider/date_provider.dart';
@@ -23,6 +24,17 @@ void main() {
       final lastDate = container.read(lastDateProvider);
 
       expect(DateTime(DateTime.now().year + maxYearTerm, 12, 31), lastDate);
+    });
+  });
+
+  group('[Provider] SelectedDateProvider 테스트 :', () {
+    test('처음으로 선택된 날짜는 오늘이다.', () {
+      final container = ProviderContainer();
+      addTearDown(container.dispose);
+
+      final firstSelectedDate = container.read(selectedDateProvider);
+
+      expect(DateTime.now().isSameDay(firstSelectedDate), true);
     });
   });
 }
