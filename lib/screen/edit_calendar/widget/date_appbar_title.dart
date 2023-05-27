@@ -2,7 +2,6 @@ import 'package:dart_date/dart_date.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todaily/provider/date_provider.dart';
-import 'package:flutter_todaily/provider/selected_date_provider.dart';
 
 class DateAppBarTitle extends ConsumerWidget {
   const DateAppBarTitle({super.key});

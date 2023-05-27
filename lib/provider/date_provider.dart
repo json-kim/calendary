@@ -12,3 +12,7 @@ final lastDateProvider = Provider<DateTime>((ref) {
 
   return DateTime(maxYear, 12, 31);
 }, name: 'LastDateProvider');
+
+/// 선택된 날짜 프로바이더
+final selectedDateProvider = StateProvider<DateTime>((ref) => DateTime.now(),
+    name: 'SelectedDateProvider');
