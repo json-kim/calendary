@@ -9,7 +9,7 @@ part of 'edit_calendar_model.dart';
 _$_EditCalendarModel _$$_EditCalendarModelFromJson(Map<String, dynamic> json) =>
     _$_EditCalendarModel(
       title: json['title'] as String,
-      content: json['content'] as String,
+      content: json['content'] as String?,
       mood: $enumDecode(_$CalendarMoodEnumMap, json['mood']),
       date: DateTime.parse(json['date'] as String),
     );

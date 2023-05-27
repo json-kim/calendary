@@ -9,7 +9,7 @@ part 'edit_calendar_model.g.dart';
 class EditCalendarModel with _$EditCalendarModel {
   const factory EditCalendarModel({
     required String title,
-    required String content,
+    required String? content,
     required CalendarMood mood,
     required DateTime date,
   }) = _EditCalendarModel;

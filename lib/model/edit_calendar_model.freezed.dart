@@ -21,7 +21,7 @@ EditCalendarModel _$EditCalendarModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$EditCalendarModel {
   String get title => throw _privateConstructorUsedError;
-  String get content => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
   CalendarMood get mood => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
 
@@ -37,7 +37,7 @@ abstract class $EditCalendarModelCopyWith<$Res> {
           EditCalendarModel value, $Res Function(EditCalendarModel) then) =
       _$EditCalendarModelCopyWithImpl<$Res, EditCalendarModel>;
   @useResult
-  $Res call({String title, String content, CalendarMood mood, DateTime date});
+  $Res call({String title, String? content, CalendarMood mood, DateTime date});
 }
 
 /// @nodoc
@@ -54,7 +54,7 @@ class _$EditCalendarModelCopyWithImpl<$Res, $Val extends EditCalendarModel>
   @override
   $Res call({
     Object? title = null,
-    Object? content = null,
+    Object? content = freezed,
     Object? mood = null,
     Object? date = null,
   }) {
@@ -63,10 +63,10 @@ class _$EditCalendarModelCopyWithImpl<$Res, $Val extends EditCalendarModel>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       mood: null == mood
           ? _value.mood
           : mood // ignore: cast_nullable_to_non_nullable
@@ -87,7 +87,7 @@ abstract class _$$_EditCalendarModelCopyWith<$Res>
       __$$_EditCalendarModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String title, String content, CalendarMood mood, DateTime date});
+  $Res call({String title, String? content, CalendarMood mood, DateTime date});
 }
 
 /// @nodoc
@@ -102,7 +102,7 @@ class __$$_EditCalendarModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? title = null,
-    Object? content = null,
+    Object? content = freezed,
     Object? mood = null,
     Object? date = null,
   }) {
@@ -111,10 +111,10 @@ class __$$_EditCalendarModelCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      content: null == content
+      content: freezed == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       mood: null == mood
           ? _value.mood
           : mood // ignore: cast_nullable_to_non_nullable
@@ -142,7 +142,7 @@ class _$_EditCalendarModel implements _EditCalendarModel {
   @override
   final String title;
   @override
-  final String content;
+  final String? content;
   @override
   final CalendarMood mood;
   @override
@@ -186,7 +186,7 @@ class _$_EditCalendarModel implements _EditCalendarModel {
 abstract class _EditCalendarModel implements EditCalendarModel {
   const factory _EditCalendarModel(
       {required final String title,
-      required final String content,
+      required final String? content,
       required final CalendarMood mood,
       required final DateTime date}) = _$_EditCalendarModel;
 
@@ -196,7 +196,7 @@ abstract class _EditCalendarModel implements EditCalendarModel {
   @override
   String get title;
   @override
-  String get content;
+  String? get content;
   @override
   CalendarMood get mood;
   @override
