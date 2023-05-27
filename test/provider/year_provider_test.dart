@@ -4,16 +4,14 @@ import 'package:flutter_todaily/provider/year_provider.dart';
 import 'package:flutter_todaily/util/const_value.dart';
 import 'package:mockito/mockito.dart';
 
-class Listener with Mock {
-  void call(int? previous, int value);
-}
+import '../test_util/listener.dart';
 
 void main() {
   group('[Provider] YearProvider 테스트 :', () {
     test('생성시, 최초 연도는 올해 연도이다.', () {
       final container = ProviderContainer();
       addTearDown(container.dispose);
-      final listener = Listener();
+      final listener = Listener<int>();
 
       container.listen<int>(yearProvider, listener, fireImmediately: true);
 
