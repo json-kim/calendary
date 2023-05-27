@@ -161,5 +161,55 @@ void main() {
       expect(
           container.read(editCalendarProvider.notifier).checkValidate(), true);
     });
+
+    test('saveCalendar() 캘린더를 저장한다. 저장된 캘린더가 없다면, 새로 캘린더를 저장한다.', () async {
+      final container = ProviderContainer(overrides: [
+        calenarRepositoryProvider.overrideWithValue(mockRepository),
+      ]);
+      addTearDown(container.dispose);
+
+      final editCalendar = container.read(editCalendarProvider);
+      when(mockRepository.insertEditCalendar(editCalendar))
+          .thenAnswer((_) async => faker.randomGenerator.integer(1000));
+      final resultSuccess =
+          await container.read(editCalendarProvider.notifier).saveCalendar();
+      verify(mockRepository.insertEditCalendar(editCalendar)).called(1);
+      expect(resultSuccess, true);
+
+      when(mockRepository.insertEditCalendar(editCalendar))
+          .thenAnswer((_) async => null);
+      final resultFail =
+          await container.read(editCalendarProvider.notifier).saveCalendar();
+      verify(mockRepository.insertEditCalendar(editCalendar)).called(1);
+      expect(resultFail, false);
+    });
+
+    test('saveCalendar() 캘린더를 저장한다. 저장된 캘린더가 있다면, 캘린더를 수정한다.', () async {
+      final calendar = getMockCalendarModel();
+      final container = ProviderContainer(overrides: [
+        calenarRepositoryProvider.overrideWithValue(mockRepository),
+        selectedCalendarProvider.overrideWith((ref) => calendar),
+      ]);
+      addTearDown(container.dispose);
+
+      final editCalendar = container.read(editCalendarProvider);
+      final updateCalendar = calendar.copyWith(
+          title: editCalendar.title,
+          content: editCalendar.content,
+          mood: editCalendar.mood);
+      when(mockRepository.updateCalendar(updateCalendar))
+          .thenAnswer((_) async => faker.randomGenerator.integer(1000));
+      final resultSuccess =
+          await container.read(editCalendarProvider.notifier).saveCalendar();
+      verify(mockRepository.updateCalendar(updateCalendar)).called(1);
+      expect(resultSuccess, true);
+
+      when(mockRepository.updateCalendar(updateCalendar))
+          .thenAnswer((_) async => null);
+      final resultFail =
+          await container.read(editCalendarProvider.notifier).saveCalendar();
+      verify(mockRepository.updateCalendar(updateCalendar)).called(1);
+      expect(resultFail, false);
+    });
   });
 }
