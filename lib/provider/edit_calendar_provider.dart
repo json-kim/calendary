@@ -2,17 +2,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todaily/model/edit_calendar_model.dart';
 import 'package:flutter_todaily/model/enum/calendar_mood_enum.dart';
 import 'package:flutter_todaily/provider/date_provider.dart';
+import 'package:flutter_todaily/provider/selected_calendar_provider.dart';
 
 class EditCalendarNotifier extends AutoDisposeNotifier<EditCalendarModel> {
   @override
   EditCalendarModel build() {
-    final selectedDate = ref.watch(selectedDateProvider);
+    final selectedCalendar = ref.watch(selectedCalendarProvider).value;
 
     return EditCalendarModel(
-      title: '',
-      content: '',
-      date: selectedDate,
-      mood: CalendarMood.veryGood,
+      title: selectedCalendar?.title ?? '',
+      content: selectedCalendar?.content ?? '',
+      date: selectedCalendar?.date ?? ref.watch(selectedDateProvider),
+      mood: selectedCalendar?.mood ?? CalendarMood.veryGood,
     );
   }
 
