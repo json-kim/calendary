@@ -14,20 +14,26 @@ class _EditContentState extends ConsumerState<EditContent> {
   final contentController = TextEditingController();
 
   @override
-  void initState() {
-    contentController.text =
-        ref.read(editCalendarProvider.select((value) => value.content)) ?? '';
-    super.initState();
-  }
-
-  @override
   void dispose() {
     contentController.dispose();
     super.dispose();
   }
 
+  /// 콘텐트 상태값 리스너
+  void addContentListener() {
+    ref.listen(editCalendarProvider.select((value) => value.content),
+        (previous, next) {
+      contentController.text = next ?? '';
+      contentController.selection = TextSelection(
+          baseOffset: contentController.text.length,
+          extentOffset: contentController.text.length);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    addContentListener();
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
