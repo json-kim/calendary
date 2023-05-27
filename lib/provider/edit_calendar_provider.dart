@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todaily/model/edit_calendar_model.dart';
 import 'package:flutter_todaily/model/enum/calendar_mood_enum.dart';
 import 'package:flutter_todaily/provider/date_provider.dart';
+import 'package:flutter_todaily/provider/repository/calendar_repository_provider.dart';
 import 'package:flutter_todaily/provider/selected_calendar_provider.dart';
 
 class EditCalendarNotifier extends AutoDisposeNotifier<EditCalendarModel> {
@@ -34,7 +35,23 @@ class EditCalendarNotifier extends AutoDisposeNotifier<EditCalendarModel> {
 
   /// 캘린더 저장
   Future<bool> saveCalendar() async {
-    return true;
+    final savedCalendar = ref.watch(selectedCalendarProvider).value;
+
+    int? result;
+    if (savedCalendar == null) {
+      result =
+          await ref.watch(calenarRepositoryProvider).insertEditCalendar(state);
+    } else {
+      result = await ref
+          .watch(calenarRepositoryProvider)
+          .updateCalendar(savedCalendar.copyWith(
+            title: state.title,
+            content: state.content,
+            mood: state.mood,
+          ));
+    }
+
+    return result != null;
   }
 
   /// 캘린더 유효성 체크
