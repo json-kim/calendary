@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todaily/screen/edit_calendar/widget/date_appbar_title.dart';
 import 'package:flutter_todaily/screen/edit_calendar/widget/edit_button.dart';
 import 'package:flutter_todaily/screen/edit_calendar/widget/edit_content.dart';
 import 'package:flutter_todaily/screen/edit_calendar/widget/edit_mood.dart';
@@ -16,10 +17,7 @@ class EditCalendarScreen extends StatelessWidget {
         leading: const BackButton(
           color: ColorUtils.pureBlack,
         ),
-        title: const Text(
-          '캘린더 만들기',
-          style: TextStyle(color: ColorUtils.pureBlack),
-        ),
+        title: const DateAppBarTitle(),
         backgroundColor: ColorUtils.pureWhite,
         elevation: 0,
       ),
