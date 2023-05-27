@@ -8,4 +8,12 @@ enum CalendarMood {
   final String enString;
   final String koString;
   const CalendarMood(this.enString, this.koString);
+
+  static List<CalendarMood> get moodList => [
+        veryGood,
+        good,
+        normal,
+        bad,
+        veryBad,
+      ];
 }
