@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todaily/provider/util/provider_logger.dart';
-import 'package:flutter_todaily/screen/edit_calendar/edit_calendar_screen.dart';
 import 'package:flutter_todaily/screen/year_calendar/main_calendar_screen.dart';
 
 void main() {
@@ -26,7 +25,7 @@ class MyApp extends ConsumerWidget {
         Locale('ko'), // Koread
       ],
       theme: ThemeData(useMaterial3: true),
-      home: EditCalendarScreen(),
+      home: const MainCalendarScreen(),
     );
   }
 }
