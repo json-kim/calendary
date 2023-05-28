@@ -15,6 +15,8 @@ abstract class CalendarRepositoryType {
   Future<List<CalendarModel>?> selectCalendarListInMonth(int year, int month);
   Future<CalendarModel?> selectCalendarWithDay(DateTime date);
   Future<CalendarModel?> selectCalendarWithId(int id);
+
+  Stream<List<CalendarModel>> watchCaledarListWithYear(int year);
 }
 
 class CalendarRepository implements CalendarRepositoryType {
@@ -138,5 +140,12 @@ class CalendarRepository implements CalendarRepositoryType {
 
       return null;
     }
+  }
+
+  @override
+  Stream<List<CalendarModel>> watchCaledarListWithYear(int year) {
+    return dao
+        .watchCalendarListInYear(year)
+        .map((event) => event.toModelList());
   }
 }
