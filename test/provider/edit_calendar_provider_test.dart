@@ -211,5 +211,22 @@ void main() {
       verify(mockRepository.updateCalendar(updateCalendar)).called(1);
       expect(resultFail, false);
     });
+
+    test('deleteCalendar() 저장된 캘린더가 있는 경우, 캘린더를 삭제하고, true값을 리턴한다.', () async {
+      final calendar = getMockCalendarModel();
+      final container = ProviderContainer(overrides: [
+        calenarRepositoryProvider.overrideWithValue(mockRepository),
+        selectedCalendarProvider.overrideWith((ref) => calendar),
+      ]);
+      addTearDown(container.dispose);
+
+      when(mockRepository.deleteCalendar(calendar.id))
+          .thenAnswer((_) async => true);
+
+      final result =
+          await container.read(editCalendarProvider.notifier).deleteCalendar();
+      verify(mockRepository.deleteCalendar(calendar.id)).called(1);
+      expect(result, true);
+    });
   });
 }
