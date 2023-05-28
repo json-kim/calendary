@@ -21,7 +21,7 @@ void main() {
 
   Faker faker = Faker();
 
-  group('[Dao] Calendars 테이블 dao 테스트 /', () {
+  group('[Dao] Calendars 테이블 dao 테스트 :', () {
     setUp(() {
       // 데이터 베이스(메모리) 설정
       database = LocalDatabase(nativeDatabase: NativeDatabase.memory());
@@ -226,6 +226,82 @@ void main() {
       final deletedCount = await dao.deleteCalendarAll();
 
       expect(deletedCount, 100);
+    });
+
+    test('watchCalendarListInYear() Calendars 테이블에서 연도를 기준으로 캘린더 변화를 감지한다.',
+        () async {
+      addTearDown(() async => await dao.deleteCalendarAll());
+      const year = 2024;
+
+      final dummyData = CalendarsCompanion.insert(
+          id: Value(faker.randomGenerator.integer(1000)),
+          title: faker.person.name(),
+          content: Value(faker.animal.name()),
+          mood: intToCalendarMood(Random().nextInt(5)),
+          date: faker.date.dateTime(minYear: year, maxYear: year));
+
+      // 데이터 삽입 감지
+      final expectation = expectLater(
+        dao.watchCalendarListInYear(year),
+        emitsInOrder([
+          [],
+          [
+            Calendar(
+                id: dummyData.id.value,
+                title: dummyData.title.value,
+                mood: dummyData.mood.value,
+                content: dummyData.content.value,
+                date: dummyData.date.value)
+          ]
+        ]),
+      );
+
+      await dao.insertCalendar(dummyData);
+      await expectation;
+
+      final updateDummyData = dummyData.copyWith(title: const Value('updated'));
+
+      // 데이터 수정 감지
+      final updateExpectation = expectLater(
+          dao.watchCalendarListInYear(year),
+          emitsInOrder([
+            [
+              Calendar(
+                  id: dummyData.id.value,
+                  title: dummyData.title.value,
+                  mood: dummyData.mood.value,
+                  content: dummyData.content.value,
+                  date: dummyData.date.value)
+            ],
+            [
+              Calendar(
+                  id: updateDummyData.id.value,
+                  title: updateDummyData.title.value,
+                  mood: updateDummyData.mood.value,
+                  content: updateDummyData.content.value,
+                  date: updateDummyData.date.value)
+            ]
+          ]));
+      await dao.updateCalendar(updateDummyData);
+      await updateExpectation;
+
+      // 데이터 삭제 감지
+      final deleteExpectation = expectLater(
+          dao.watchCalendarListInYear(year),
+          emitsInOrder([
+            [
+              Calendar(
+                  id: updateDummyData.id.value,
+                  title: updateDummyData.title.value,
+                  mood: updateDummyData.mood.value,
+                  content: updateDummyData.content.value,
+                  date: updateDummyData.date.value)
+            ],
+            []
+          ]));
+
+      await dao.deleteCalendar(updateDummyData.id.value);
+      await deleteExpectation;
     });
   });
 }
