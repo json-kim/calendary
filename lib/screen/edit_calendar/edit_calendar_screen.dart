@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todaily/screen/edit_calendar/widget/date_appbar_title.dart';
+import 'package:flutter_todaily/screen/edit_calendar/widget/delete_button.dart';
 import 'package:flutter_todaily/screen/edit_calendar/widget/edit_button.dart';
 import 'package:flutter_todaily/screen/edit_calendar/widget/edit_content.dart';
 import 'package:flutter_todaily/screen/edit_calendar/widget/edit_mood.dart';
@@ -20,6 +21,7 @@ class EditCalendarScreen extends StatelessWidget {
         title: const DateAppBarTitle(),
         backgroundColor: ColorUtils.pureWhite,
         elevation: 0,
+        actions: const [DeleteButton()],
       ),
       body: SafeArea(
         top: false,

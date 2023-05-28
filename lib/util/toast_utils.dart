@@ -13,4 +13,10 @@ class ToastUtils {
 
   /// 캘린더 저장 실패시
   static const String failSave = '저장에 실패했습니다.';
+
+  /// 캘린더 삭제 성공시
+  static const String successDelete = '캘린더를 삭제했습니다.';
+
+  /// 캘린더 삭제 실패시
+  static const String failDelete = '삭제에 실패했습니다.';
 }
