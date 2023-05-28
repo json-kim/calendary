@@ -16,7 +16,7 @@ class CalendarDateBox extends ConsumerWidget {
 
   Color getBoxColor(WidgetRef ref, CalendarMood? mood) {
     if (mood == null) {
-      return ColorUtils.pureWhite;
+      return ColorUtils.cardGrey;
     }
 
     return ref.watch(moodColorThemeProvider).colorWithMood(mood);
@@ -30,12 +30,12 @@ class CalendarDateBox extends ConsumerWidget {
     ));
   }
 
-  Border get border {
+  Border? get border {
     final isToday = date.isSameDay(DateTime.now());
 
     return isToday
-        ? Border.all(color: ColorUtils.pureRed, width: 2)
-        : Border.all(color: ColorUtils.pureBlack);
+        ? Border.all(color: ColorUtils.primaryPurple, width: 2)
+        : null;
   }
 
   @override
