@@ -13,7 +13,7 @@ class YearCalendar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 16),
       child: RefreshIndicator(
         onRefresh: () => refresh(ref),
         child: const SingleChildScrollView(
