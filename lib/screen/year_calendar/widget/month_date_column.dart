@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_todaily/provider/date_of_month_provider.dart';
+import 'package:flutter_todaily/provider/year_provider.dart';
+import 'package:flutter_todaily/screen/year_calendar/widget/calendar_date_box.dart';
 
 class MonthDateColumn extends ConsumerWidget {
   const MonthDateColumn({required this.month, super.key});
@@ -14,13 +16,8 @@ class MonthDateColumn extends ConsumerWidget {
     return Column(
         children: List.generate(
       dates,
-      (index) => AspectRatio(
-        aspectRatio: 1,
-        child: Container(
-          margin: const EdgeInsets.all(1),
-          decoration: BoxDecoration(border: Border.all()),
-        ),
-      ),
+      (index) => CalendarDateBox(
+          date: DateTime(ref.watch(yearProvider), month, index + 1)),
     ));
   }
 }

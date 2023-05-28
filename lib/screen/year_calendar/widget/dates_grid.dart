@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todaily/screen/year_calendar/widget/date_bar.dart';
 import 'package:flutter_todaily/screen/year_calendar/widget/month_date_column.dart';
 
 class DatesGrid extends StatelessWidget {
@@ -9,10 +10,14 @@ class DatesGrid extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(
-        12,
-        (index) => Expanded(
-          child: MonthDateColumn(month: index + 1),
-        ),
+        13,
+        (index) {
+          if (index == 0) return const Expanded(child: DateBar());
+
+          return Expanded(
+            child: MonthDateColumn(month: index),
+          );
+        },
       ),
     );
   }

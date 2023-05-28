@@ -8,7 +8,11 @@ class ProviderLogger extends ProviderObserver {
     Object? value,
     ProviderContainer container,
   ) {
-    LogUtil.log('[Provider] Add ${provider.name ?? provider.runtimeType}');
+    final arg = provider.argument;
+    final argText = arg == null ? '' : '($arg)';
+
+    LogUtil.log(
+        '[Provider] Add ${provider.name ?? provider.runtimeType}$argText');
   }
 
   @override
@@ -18,7 +22,11 @@ class ProviderLogger extends ProviderObserver {
     StackTrace stackTrace,
     ProviderContainer container,
   ) {
-    LogUtil.log('[Provider] Fail ${this.runtimeType}');
+    final arg = provider.argument;
+    final argText = arg == null ? '' : '($arg)';
+
+    LogUtil.log(
+        '[Provider] Fail ${provider.name ?? provider.runtimeType}$argText');
   }
 
   @override
@@ -28,7 +36,11 @@ class ProviderLogger extends ProviderObserver {
     Object? newValue,
     ProviderContainer container,
   ) {
-    LogUtil.log('[Provider] Update ${this.runtimeType}');
+    final arg = provider.argument;
+    final argText = arg == null ? '' : '($arg)';
+
+    LogUtil.log(
+        '[Provider] Update ${provider.name ?? provider.runtimeType}$argText');
   }
 
   @override
@@ -36,6 +48,10 @@ class ProviderLogger extends ProviderObserver {
     ProviderBase<Object?> provider,
     ProviderContainer container,
   ) {
-    LogUtil.log('[Provider] Dispose ${this.runtimeType}');
+    final arg = provider.argument;
+    final argText = arg == null ? '' : '($arg)';
+
+    LogUtil.log(
+        '[Provider] Dispose ${provider.name ?? provider.runtimeType}$argText');
   }
 }

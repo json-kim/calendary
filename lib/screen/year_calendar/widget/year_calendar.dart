@@ -1,23 +1,28 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_todaily/provider/calendar_list_provider.dart';
 import 'package:flutter_todaily/screen/year_calendar/widget/dates_grid.dart';
-import 'package:flutter_todaily/screen/year_calendar/widget/month_bar.dart';
 
-class YearCalendar extends StatelessWidget {
+class YearCalendar extends ConsumerWidget {
   const YearCalendar({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SingleChildScrollView(
-        child: Column(
-          children: const [
-            /// 월 표시 바
-            MonthBar(),
+  Future<void> refresh(WidgetRef ref) async {
+    ref.refresh(calendarListProvider);
+  }
 
-            /// 날짜 그리드
-            DatesGrid(),
-          ],
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 16),
+      child: RefreshIndicator(
+        onRefresh: () => refresh(ref),
+        child: const SingleChildScrollView(
+          child: Column(
+            children: [
+              /// 날짜 그리드
+              DatesGrid(),
+            ],
+          ),
         ),
       ),
     );

@@ -9,9 +9,9 @@ class LogUtil {
     debugPrint(logMessage);
   }
 
-  static void error(Object err, String errMessage) {
+  static void error({Object? err, String? errMessage}) {
     final logMessage = '[🚫ERR] $errMessage, $err';
-    _logs.add(errMessage);
+    _logs.add(logMessage);
     debugPrint(logMessage);
   }
 }

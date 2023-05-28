@@ -5,14 +5,19 @@ class MonthBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: List.generate(
-        12,
-        (index) => Expanded(
-          child: AspectRatio(
-            aspectRatio: 1,
-            child: Center(
-              child: Text('${index + 1}'),
+    return Padding(
+      padding: const EdgeInsets.only(right: 16),
+      child: Row(
+        children: List.generate(
+          13,
+          (index) => Expanded(
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: index == 0
+                  ? const SizedBox()
+                  : Center(
+                      child: Text('$index'),
+                    ),
             ),
           ),
         ),
