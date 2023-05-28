@@ -13,6 +13,8 @@ abstract class CalendarsDaoType {
   Future<Calendar?> selectCalendarOfDate(DateTime otherDate);
   Future<Calendar?> selectCalendarWithId(int id);
   Future<int> deleteCalendarAll();
+
+  Stream<List<Calendar>> watchCalendarListInYear(int year);
 }
 
 @DriftAccessor(tables: [Calendars])
@@ -86,5 +88,16 @@ class CalendarsDao extends DatabaseAccessor<LocalDatabase>
   @override
   Future<int> deleteCalendarAll() {
     return delete(calendars).go();
+  }
+
+  /// 캘린더 바라보기 with year
+  @override
+  Stream<List<Calendar>> watchCalendarListInYear(int year) {
+    return (select(calendars)
+          ..where((tbl) => tbl.date
+              .modify(const DateTimeModifier.localTime())
+              .year
+              .equals(year)))
+        .watch();
   }
 }
