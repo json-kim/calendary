@@ -14,6 +14,13 @@ class _EditTitleState extends ConsumerState<EditTitle> {
   final titleController = TextEditingController();
 
   @override
+  void initState() {
+    titleController.text =
+        ref.read(editCalendarProvider.select((value) => value.title));
+    super.initState();
+  }
+
+  @override
   void dispose() {
     titleController.dispose();
     super.dispose();

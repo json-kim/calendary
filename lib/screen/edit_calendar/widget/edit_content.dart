@@ -14,6 +14,13 @@ class _EditContentState extends ConsumerState<EditContent> {
   final contentController = TextEditingController();
 
   @override
+  void initState() {
+    contentController.text =
+        ref.read(editCalendarProvider.select((value) => value.content ?? ''));
+    super.initState();
+  }
+
+  @override
   void dispose() {
     contentController.dispose();
     super.dispose();
