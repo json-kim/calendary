@@ -1,20 +1,19 @@
+import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_todaily/model/calendar_model.dart';
+import 'package:flutter_todaily/model/enum/calendar_mood_enum.dart';
+import 'package:flutter_todaily/provider/calendar_list_provider.dart';
 import 'package:flutter_todaily/provider/date_provider.dart';
 import 'package:flutter_todaily/provider/mood_color_provider.dart';
 import 'package:flutter_todaily/screen/edit_calendar/edit_calendar_screen.dart';
 import 'package:flutter_todaily/util/color_utils.dart';
 
 class CalendarDateBox extends ConsumerWidget {
-  const CalendarDateBox({required this.date, this.calendar, super.key});
+  const CalendarDateBox({required this.date, super.key});
 
-  final CalendarModel? calendar;
   final DateTime date;
 
-  Color getBoxColor(WidgetRef ref) {
-    final mood = calendar?.mood;
-
+  Color getBoxColor(WidgetRef ref, CalendarMood? mood) {
     if (mood == null) {
       return ColorUtils.pureWhite;
     }
@@ -32,6 +31,10 @@ class CalendarDateBox extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final calendar = ref.watch(calendarListProvider.select((data) => data.value
+        ?.firstWhereOrNull(
+            (e) => e.date.month == date.month && e.date.day == date.day)));
+
     return GestureDetector(
       onTap: () => goToEditScreen(context, ref),
       child: AspectRatio(
@@ -40,7 +43,7 @@ class CalendarDateBox extends ConsumerWidget {
           margin: const EdgeInsets.all(1),
           decoration: BoxDecoration(
             border: Border.all(),
-            color: getBoxColor(ref),
+            color: getBoxColor(ref, calendar?.mood),
           ),
         ),
       ),
