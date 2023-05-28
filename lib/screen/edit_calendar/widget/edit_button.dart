@@ -20,6 +20,10 @@ class EditButton extends ConsumerWidget {
     final isSuccess =
         await ref.watch(editCalendarProvider.notifier).saveCalendar();
 
+    if (isSuccess) {
+      ref.refresh(selectedCalendarProvider);
+    }
+
     ToastUtils.showToast(
         isSuccess ? ToastUtils.successSave : ToastUtils.failSave);
   }
