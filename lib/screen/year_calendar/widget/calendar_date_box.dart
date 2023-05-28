@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:dart_date/dart_date.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todaily/model/enum/calendar_mood_enum.dart';
@@ -29,6 +30,14 @@ class CalendarDateBox extends ConsumerWidget {
     ));
   }
 
+  Border get border {
+    final isToday = date.isSameDay(DateTime.now());
+
+    return isToday
+        ? Border.all(color: ColorUtils.pureRed, width: 2)
+        : Border.all(color: ColorUtils.pureBlack);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final calendar = ref.watch(calendarListProvider.select((data) => data.value
@@ -42,7 +51,7 @@ class CalendarDateBox extends ConsumerWidget {
         child: Container(
           margin: const EdgeInsets.all(1),
           decoration: BoxDecoration(
-            border: Border.all(),
+            border: border,
             color: getBoxColor(ref, calendar?.mood),
           ),
         ),
