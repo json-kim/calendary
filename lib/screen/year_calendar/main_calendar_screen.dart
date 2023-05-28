@@ -12,7 +12,7 @@ class MainCalendarScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          '오늘 하루',
+          '캘린더리',
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
