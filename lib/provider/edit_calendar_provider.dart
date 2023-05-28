@@ -59,6 +59,21 @@ class EditCalendarNotifier extends AutoDisposeNotifier<EditCalendarModel> {
     final title = state.title;
     return title.length > 1;
   }
+
+  /// 캘린더 삭제
+  Future<bool> deleteCalendar() async {
+    final savedCalendar = ref.watch(selectedCalendarProvider).value;
+
+    if (savedCalendar == null) {
+      return false;
+    }
+
+    final result = await ref
+        .watch(calenarRepositoryProvider)
+        .deleteCalendar(savedCalendar.id);
+
+    return result;
+  }
 }
 
 final editCalendarProvider =
