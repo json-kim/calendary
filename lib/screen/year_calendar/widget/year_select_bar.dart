@@ -19,7 +19,10 @@ class YearSelectBar extends ConsumerWidget {
             icon: const Icon(Icons.arrow_back_ios)),
 
         /// 현재 연도
-        Text(year.toString()),
+        Text(
+          year.toString(),
+          style: const TextStyle(fontSize: 18),
+        ),
 
         /// 다음 연도 버튼
         IconButton(
