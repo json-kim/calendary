@@ -26,21 +26,8 @@ class _EditTitleState extends ConsumerState<EditTitle> {
     super.dispose();
   }
 
-  /// 타이틀 상태값 리스너 등록
-  void addTitleListener() {
-    ref.listen(editCalendarProvider.select((value) => value.title),
-        (previous, next) {
-      titleController.text = next;
-      titleController.selection = TextSelection(
-          baseOffset: titleController.text.length,
-          extentOffset: titleController.text.length);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    addTitleListener();
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
