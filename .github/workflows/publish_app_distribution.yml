@@ -13,8 +13,7 @@ jobs:
     - name: Install Homebrew # homebrew 설치
       run: |
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $GITHUB_ENV
-        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+        echo 'PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"' >> $GITHUB_ENV
 
     - name: Install Fastlane # fastlane 설치
       run: brew install fastlane
@@ -22,10 +21,7 @@ jobs:
     - name: Install Flutter # flutter sdk 설치
       run: |
         git clone https://github.com/flutter/flutter.git -b 3.16.0 $HOME/flutter
-        echo 'export PATH="$PATH:$HOME/flutter/bin"' >> $GITHUB_ENV
-        echo 'export PATH="$PATH:$HOME/flutter/bin/cache/dart-sdk/bin"' >> $GITHUB_ENV
-        echo 'export PATH="$PATH:$HOME/.pub-cache/bin"' >> $GITHUB_ENV
-        flutter pub get
+        echo 'PATH="$HOME/flutter/bin:$PATH"' >> $GITHUB_ENV
     
     - name: Run Fastlane # fastlane 레인 실행
       run: |
