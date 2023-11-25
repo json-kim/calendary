@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jsonkim.flutter_todaily">
+    package="com.jsonkim.calendary">
    <application
         android:label="캘린더리"
         android:name="${applicationName}"

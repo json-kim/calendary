@@ -1,0 +1,57 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Increase Version Code"
+  lane :increase_version_code do
+    yaml_file_path = "../../pubspec.yaml"
+    data = YAML.load_file(yaml_file_path)
+    version = data["version"]
+
+    version_number = data["version"].split("+")[0]
+    # to_i는 to_integer를 의미하는 ruby 함수.
+    version_code = number_of_commits(all: true)
+    new_version_code = version_code + 1
+    new_version = "#{version_number}+#{new_version_code}"
+
+    data["version"] = new_version
+    File.open(yaml_file_path, 'w') { |f| YAML.dump(data, f) }
+  end
+
+  desc "Upload to Fireabase Distribution"
+  lane :distribute do
+    ## Increase Viersion Code
+    increase_version_code
+
+    ## Build App
+    sh("flutter build appbundle --release -t lib/main.dart")
+    
+    ## Upload to Firebase App Distribution
+    release = firebase_app_distribution(
+      app: "1:525828192309:android:789b0dd754ab8cfc45997c",
+      groups: "tester",
+      android_artifact_type: "AAB",
+      android_artifact_path: "../build/app/outputs/bundle/release/app-release.aab",
+    )
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "clean assembleRelease")
+    upload_to_play_store
+  end
+end

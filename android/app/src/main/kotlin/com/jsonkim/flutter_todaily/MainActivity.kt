@@ -1,4 +1,4 @@
-package com.jsonkim.flutter_todaily
+package com.jsonkim.calendary
 
 import io.flutter.embedding.android.FlutterActivity
 
