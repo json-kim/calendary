@@ -1,0 +1,23 @@
+changelog:
+  categories:
+    - title: ✨feature
+      labels:
+        - ✨feature
+    - title: 🐛bug
+      labels:
+        - 🐛bug
+    - title: 🔨refactoring
+      labels:
+        - 🔨refactoring
+    - title: 🎨ui&design
+      labels:
+        - 🎨ui&design
+    - title: 🧪test
+      labels:
+        - 🧪test
+    - title: ⚙️build
+      labels:
+        - ⚙️build
+    - title: 📄documentation
+      labels:
+        - 📄documentation
