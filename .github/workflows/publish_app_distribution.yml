@@ -10,11 +10,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2 # 저장소 코드를 체크아웃
 
-    # - name: Install Homebrew # homebrew 설치
-    #   run: |
-    #     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    #     echo 'export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH"' >> ~/.zshrc
-
+    - name: Installing Homebrew
+      run: |
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+        test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+        echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+        echo "::add-path::/home/linuxbrew/.linuxbrew/bin"
+        brew --version
 
     - name: Install Fastlane # fastlane 설치
       run: brew install fastlane
