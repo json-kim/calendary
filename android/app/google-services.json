@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "525828192309",
+    "project_id": "flutter-todaily",
+    "storage_bucket": "flutter-todaily.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:525828192309:android:789b0dd754ab8cfc45997c",
+        "android_client_info": {
+          "package_name": "com.jsonkim.calendary"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_bL3iDL_NhEBOSw3KyY_4sQnLFVS5xC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
