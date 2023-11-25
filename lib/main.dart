@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_todaily/core/firebase_setting.dart';
 import 'package:flutter_todaily/provider/util/provider_logger.dart';
 import 'package:flutter_todaily/screen/year_calendar/main_calendar_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initFirebaes();
   runApp(ProviderScope(observers: [ProviderLogger()], child: const MyApp()));
 }
 
