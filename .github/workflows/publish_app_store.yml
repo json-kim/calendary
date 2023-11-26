@@ -2,6 +2,17 @@ name: Upload To Store
 
 on:
   workflow_dispatch: # 수동으로 작업 실행
+    inputs:
+      track:
+        description: 'Android store track'
+        required: true
+        default: 'internal'
+        type: choice
+        options:
+        - production
+        - internal
+        - beta
+        - alpha
 
 jobs:
   deploy-android-app-internal-track:
@@ -36,6 +47,9 @@ jobs:
         echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
         echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
         echo "storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}" >> android/key.properties
+    
+    - name: Setup Fastlane env for store track # 플레이스토어 트랙을 환경변수로 등록합니다.
+      run: echo "ANDROID_STORE_TRACK=${{ inputs.track }}" >> $GITHUB_ENV 
 
     - name: Run Fastlane # fastlane deploy 레인을 실행합니다
       run: |
