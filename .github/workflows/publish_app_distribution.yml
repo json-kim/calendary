@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2 # 저장소 코드를 체크아웃
 
-    - name: Set up Ruby
+    - name: Set up Ruby # 루비를 설치합니다
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '2.7' # 필요에 따라 Ruby 버전을 조정하세요.
