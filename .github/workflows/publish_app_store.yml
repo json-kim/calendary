@@ -46,7 +46,7 @@ jobs:
         CREDENTIAL_JSON: ${{ secrets.FASTLANE_CREDENTIAL_JSON_BASE64 }}
       run: |
         echo $CREDENTIAL_JSON | base64 --decode > flutter-todaily-fastlane-f7f196ae76eb.json
-        echo "CREDENTIAL_JSON_KEY_PATH=../../flutter-todaily-fastlane-f7f196ae76eb.json" >> $GITHUB_ENV 
+        echo "CREDENTIAL_JSON_KEY_PATH=../flutter-todaily-fastlane-f7f196ae76eb.json" >> $GITHUB_ENV 
     
     - name: Create key.properties file # key.properties 파일을 생성합니다
       run: |
