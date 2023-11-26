@@ -15,16 +15,28 @@ jobs:
       with:
         ruby-version: '2.7' # 필요에 따라 Ruby 버전을 조정하세요.
 
-    - name: Install Fastlane # fastlane 설치
+    - name: Install Fastlane # fastlane을 설치합니다
       run: |
         gem install fastlane
     
-    - name: Setup Flutter
+    - name: Install Flutter # 플러터 sdk를 설치합니다
       uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.16.0' # 원하는 Flutter 버전을 설정합니다.
+
+    - name: Create Android Upload Keystore # upload-keystore.jks 파일을 생성합니다
+      env: KEYSTORE: ${{ secrets.KEYSTORE_BASE64 }}
+      run: |
+        echo $KEYSTORE | base64 --decode > android/app/upload-keystore.jks
     
-    - name: Run Fastlane # fastlane 레인 실행
+    - name: Create key.properties file # key.properties 파일을 생성합니다
+      run: |
+        echo "storeFile=upload-keystore.jks" > android/key.properties
+        echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
+        echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
+        echo "storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}" >> android/key.properties
+    
+    - name: Run Fastlane # fastlane distribute 레인을 실행합니다
       run: |
         flutter pub get
         cd android
