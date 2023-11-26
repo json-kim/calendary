@@ -19,12 +19,13 @@ jobs:
       run: |
         gem install fastlane
     
-    - name: Install Flutter # flutter sdk 설치
-      run: |
-        git clone https://github.com/flutter/flutter.git -b 3.16.0 $HOME/flutter
-        echo 'PATH="$HOME/flutter/bin:$PATH"' >> ~/.zshrc
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.16.0' # 원하는 Flutter 버전을 설정합니다.
     
     - name: Run Fastlane # fastlane 레인 실행
       run: |
+        flutter pub get
         cd android
         fastlane distribute
