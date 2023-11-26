@@ -25,7 +25,8 @@ jobs:
         flutter-version: '3.16.0' # 원하는 Flutter 버전을 설정합니다.
 
     - name: Create Android Upload Keystore # upload-keystore.jks 파일을 생성합니다
-      env: KEYSTORE: ${{ secrets.KEYSTORE_BASE64 }}
+      env: 
+        KEYSTORE: ${{ secrets.KEYSTORE_BASE64 }}
       run: |
         echo $KEYSTORE | base64 --decode > android/app/upload-keystore.jks
     
