@@ -43,6 +43,7 @@ platform :android do
     ## Upload to Firebase App Distribution
     release = firebase_app_distribution(
       app: "1:525828192309:android:789b0dd754ab8cfc45997c",
+      firebase_cli_token: ENV["FIREBASE_TOKEN"],
       groups: "tester",
       android_artifact_type: "AAB",
       android_artifact_path: "../build/app/outputs/bundle/release/app-release.aab",

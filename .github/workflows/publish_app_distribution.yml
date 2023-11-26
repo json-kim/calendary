@@ -36,6 +36,9 @@ jobs:
         echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
         echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
         echo "storePassword=${{ secrets.ANDROID_STORE_PASSWORD }}" >> android/key.properties
+
+    - name: Setup Fastlane env for firebase token # 파이어베이스 토큰을 fastlane에서 사용하기 위해 환경변수로 등록합니다.
+      run: echo "FIREBASE_TOKEN=${{ secrets.FIREBASE_TOKEN }}" >> $GITHUB_ENV 
     
     - name: Run Fastlane # fastlane distribute 레인을 실행합니다
       run: |
